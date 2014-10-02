@@ -61,13 +61,13 @@ class NewsFeedViewController: UIViewController {
         
         for item in weddingImages {
             var tapGesture = UITapGestureRecognizer(target: self, action: "onTapGesture:")
-            
             item.addGestureRecognizer(tapGesture)
         }
     }
     
     func onTapGesture(tapgesture: UITapGestureRecognizer) {
         println("I just tapped that")
+        performSegueWithIdentifier("photoDetailSegue", sender: self)
     }
     
     func delay(delay:Double, closure:()->()) {
