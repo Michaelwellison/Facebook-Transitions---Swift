@@ -78,4 +78,12 @@ class NewsFeedViewController: UIViewController {
             ),
             dispatch_get_main_queue(), closure)
     }
+    
+    // MARK: Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        var destinationViewController = segue.destinationViewController as PhotoViewController
+        
+        destinationViewController.photoViewImage.image = self.wedding1ImageView.image
+    }
 }

@@ -10,10 +10,11 @@ import UIKit
 
 class PhotoViewController: UIViewController {
 
+    @IBOutlet weak var photoViewImage: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        photoViewImage.image = photoViewImage.image
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,6 +26,8 @@ class PhotoViewController: UIViewController {
     @IBAction func onDoneButton(sender: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
+ 
 
     /*
     // MARK: - Navigation
