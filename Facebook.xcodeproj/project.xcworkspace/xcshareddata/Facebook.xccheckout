@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>AC63FB31-E958-42BA-8852-AD87CE1AD008</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Facebook</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>BD9F71F43E28052F260693D6D0ED061ACA8B6BFF</key>
+		<string>https://github.com/Michaelwellison/Facebook-Transitions---Swift.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Facebook.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>BD9F71F43E28052F260693D6D0ED061ACA8B6BFF</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Michaelwellison/Facebook-Transitions---Swift.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>BD9F71F43E28052F260693D6D0ED061ACA8B6BFF</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BD9F71F43E28052F260693D6D0ED061ACA8B6BFF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Facebook</string>
+		</dict>
+	</array>
+</dict>
+</plist>
