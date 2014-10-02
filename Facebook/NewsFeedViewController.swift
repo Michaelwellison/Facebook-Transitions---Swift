@@ -9,16 +9,28 @@
 import UIKit
 
 class NewsFeedViewController: UIViewController {
+   
+    // MARK: Outlets
     @IBOutlet var rootView: UIView!
-
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var feedImageView: UIImageView!
+    @IBOutlet weak var wedding1ImageView: UIImageView!
+    @IBOutlet weak var wedding2ImageView: UIImageView!
+    @IBOutlet weak var wedding3ImageView: UIImageView!
+    @IBOutlet weak var wedding4ImageView: UIImageView!
+    @IBOutlet weak var wedding5ImageView: UIImageView!
     
+    // MARK: Variables
+    var weddingImages : [UIImageView] = []
+    
+    // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Configure the content size of the scroll view
+        
+        
+        configureWeddingImages()
+        
         scrollView.contentSize = CGSizeMake(320, feedImageView.image!.size.height)
         
         activityIndicator.startAnimating()
@@ -28,7 +40,6 @@ class NewsFeedViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -43,6 +54,20 @@ class NewsFeedViewController: UIViewController {
             self.rootView.hidden = false
             self.activityIndicator.stopAnimating()
         })
+    }
+    
+    func configureWeddingImages() {
+        weddingImages += [wedding1ImageView, wedding2ImageView, wedding3ImageView, wedding4ImageView, wedding5ImageView]
+        
+        for item in weddingImages {
+            var tapGesture = UITapGestureRecognizer(target: self, action: "onTapGesture:")
+            
+            item.addGestureRecognizer(tapGesture)
+        }
+    }
+    
+    func onTapGesture(tapgesture: UITapGestureRecognizer) {
+        println("I just tapped that")
     }
     
     func delay(delay:Double, closure:()->()) {
