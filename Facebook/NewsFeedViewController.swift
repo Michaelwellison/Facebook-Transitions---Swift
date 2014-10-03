@@ -23,6 +23,7 @@ class NewsFeedViewController: UIViewController {
     
     // MARK: Variables
     var weddingImages : [UIImageView] = []
+    var selectedImageView : UIImageView?
     
     // MARK: View Lifecycle
     
@@ -66,8 +67,10 @@ class NewsFeedViewController: UIViewController {
         }
     }
     
-    func onTapGesture(tapgesture: UITapGestureRecognizer) {
+    func onTapGesture(tapGesture: UITapGestureRecognizer) {
         println("I just tapped that")
+          selectedImageView = tapGesture.view as? UIImageView
+
         performSegueWithIdentifier("photoDetailSegue", sender: self)
     }
     
@@ -85,6 +88,6 @@ class NewsFeedViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         var destinationViewController = segue.destinationViewController as PhotoViewController
         
-        destinationViewController.newImage = self.wedding1ImageView.image
+        destinationViewController.newImage = self.selectedImageView!.image
     }
 }
