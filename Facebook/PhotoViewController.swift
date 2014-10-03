@@ -11,10 +11,13 @@ import UIKit
 class PhotoViewController: UIViewController {
 
     @IBOutlet weak var photoViewImage: UIImageView!
+    var newImage : UIImage?
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        photoViewImage.image = photoViewImage.image
+        photoViewImage.image = newImage
+        
     }
 
     override func didReceiveMemoryWarning() {

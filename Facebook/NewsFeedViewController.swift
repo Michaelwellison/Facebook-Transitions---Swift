@@ -25,6 +25,7 @@ class NewsFeedViewController: UIViewController {
     var weddingImages : [UIImageView] = []
     
     // MARK: View Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -84,6 +85,6 @@ class NewsFeedViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         var destinationViewController = segue.destinationViewController as PhotoViewController
         
-        destinationViewController.photoViewImage.image = self.wedding1ImageView.image
+        destinationViewController.newImage = self.wedding1ImageView.image
     }
 }
