@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewsFeedViewController: UIViewController {
+class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning {
    
     // MARK: Outlets
     @IBOutlet var rootView: UIView!
@@ -24,6 +24,7 @@ class NewsFeedViewController: UIViewController {
     // MARK: Variables
     var weddingImages : [UIImageView] = []
     var selectedImageView : UIImageView?
+    var isPresenting : Bool = true
     
     // MARK: View Lifecycle
     
@@ -58,6 +59,8 @@ class NewsFeedViewController: UIViewController {
         })
     }
     
+    // MARK: Configuration
+    
     func configureWeddingImages() {
         weddingImages += [wedding1ImageView, wedding2ImageView, wedding3ImageView, wedding4ImageView, wedding5ImageView]
         
@@ -65,13 +68,6 @@ class NewsFeedViewController: UIViewController {
             var tapGesture = UITapGestureRecognizer(target: self, action: "onTapGesture:")
             item.addGestureRecognizer(tapGesture)
         }
-    }
-    
-    func onTapGesture(tapGesture: UITapGestureRecognizer) {
-        println("I just tapped that")
-          selectedImageView = tapGesture.view as? UIImageView
-
-        performSegueWithIdentifier("photoDetailSegue", sender: self)
     }
     
     func delay(delay:Double, closure:()->()) {
@@ -83,10 +79,65 @@ class NewsFeedViewController: UIViewController {
             dispatch_get_main_queue(), closure)
     }
     
+
+    func onTapGesture(tapGesture: UITapGestureRecognizer) {
+        
+        selectedImageView = tapGesture.view as? UIImageView
+
+        performSegueWithIdentifier("photoDetailSegue", sender: self)
+    }
+    
+    // MARK: Transition Delegate Methods
+    
+    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        isPresenting = true
+        return self
+    }
+    
+    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        isPresenting = false
+        return self
+    }
+    
+    // MARK: Animated Transitioning Functions
+    
+    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
+        
+        return 1.0
+    }
+    
+    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+        println("animating transition")
+        var containerView = transitionContext.containerView()
+        var toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
+        var fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
+        
+        if (isPresenting) {
+            containerView.addSubview(toViewController!.view)
+            toViewController!.view.alpha = 0
+            UIView.animateWithDuration(1.0, animations: { () -> Void in
+                toViewController!.view.alpha = 1
+                }, completion: { (finished: Bool) -> Void in
+                transitionContext.completeTransition(true)
+            })
+        } else {
+            UIView.animateWithDuration(1.0, animations: { () -> Void in
+                fromViewController!.view.alpha = 0
+                }, completion: { (finished: Bool) -> Void in
+                transitionContext.completeTransition(true)
+                fromViewController?.view.removeFromSuperview()
+            })
+        }
+    }
+
+    
     // MARK: Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         var destinationViewController = segue.destinationViewController as PhotoViewController
+        destinationViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
+        destinationViewController.transitioningDelegate = self
+        
         
         destinationViewController.newImage = self.selectedImageView!.image
     }
