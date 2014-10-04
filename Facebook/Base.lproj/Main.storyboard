@@ -216,7 +216,9 @@
                     <navigationItem key="navigationItem" id="m9U-cv-OHe"/>
                     <connections>
                         <outlet property="activityIndicator" destination="Is1-XD-aSD" id="jag-6M-tOO"/>
+                        <outlet property="composeImageView" destination="XEc-gq-16V" id="Xae-7F-boj"/>
                         <outlet property="feedImageView" destination="BFk-jQ-UCW" id="FKQ-21-8kr"/>
+                        <outlet property="navBarImage" destination="E2h-uT-3F1" id="97F-kb-Wg1"/>
                         <outlet property="rootView" destination="miJ-o9-OHC" id="7Fb-OX-8dG"/>
                         <outlet property="scrollView" destination="YZ6-vp-O3X" id="Pgj-Be-1bK"/>
                         <outlet property="wedding1ImageView" destination="Ks0-qh-4dY" id="s3Q-97-ptC"/>

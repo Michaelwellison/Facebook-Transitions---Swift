@@ -21,6 +21,10 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
     @IBOutlet weak var wedding4ImageView: UIImageView!
     @IBOutlet weak var wedding5ImageView: UIImageView!
     
+    @IBOutlet weak var navBarImage: UIImageView!
+    
+    @IBOutlet weak var composeImageView: UIImageView!
+    
     // MARK: Variables
     var weddingImages : [UIImageView] = []
     var selectedImageView : UIImageView?
@@ -82,8 +86,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
     func onTapGesture(tapGesture: UITapGestureRecognizer) {
         
         selectedImageView = tapGesture.view as? UIImageView
-
-        performSegueWithIdentifier("photoDetailSegue", sender: self)
+        self.performSegueWithIdentifier("photoDetailSegue", sender: self)
     }
     
     // MARK: Transition Delegate Methods
@@ -114,10 +117,11 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
         if (isPresenting) {
             containerView.addSubview(toViewController!.view)
             
-            var imageView = UIImageView(frame: self.selectedImageView!.frame)
+            var imageView = UIImageView(frame: CGRect(x: self.selectedImageView!.frame.origin.x, y: self.selectedImageView!.frame.origin.y + self.navBarImage.frame.height + self.composeImageView.frame.height, width: self.selectedImageView!.frame.width, height: self.selectedImageView!.frame.height))
+            println("x is \(imageView.frame.origin.x) and y is \(imageView.frame.origin.y)")
             imageView.image = self.selectedImageView!.image
             containerView.addSubview(imageView)
-
+            toViewController!.view.alpha = 0
             UIView.animateWithDuration(1.0, animations: { () -> Void in
                 
                 imageView.frame = CGRect(x: containerView.frame.origin.x, y: containerView.frame.origin.y, width: containerView.frame.width, height: containerView.frame.height)
@@ -126,6 +130,8 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
                 }, completion: { (finished: Bool) -> Void in
                 imageView.removeFromSuperview()
                 transitionContext.completeTransition(true)
+
+                    
             })
         } else {
             UIView.animateWithDuration(1.0, animations: { () -> Void in
