@@ -124,7 +124,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             toViewController!.view.alpha = 0
             UIView.animateWithDuration(1.0, animations: { () -> Void in
                 
-                imageView.frame = CGRect(x: containerView.frame.origin.x, y: containerView.frame.origin.y, width: containerView.frame.width, height: containerView.frame.height)
+                imageView.frame = CGRect(x: 0, y: 44, width: 320, height: 480)
                 toViewController!.view.alpha = 1
     
                 }, completion: { (finished: Bool) -> Void in
