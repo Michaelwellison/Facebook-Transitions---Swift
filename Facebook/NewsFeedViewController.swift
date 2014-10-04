@@ -126,6 +126,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
                 
                 imageView.frame = CGRect(x: 0, y: 44, width: 320, height: 480)
                 toViewController!.view.alpha = 1
+                imageView.contentMode = UIViewContentMode.ScaleAspectFit
     
                 }, completion: { (finished: Bool) -> Void in
                 imageView.removeFromSuperview()
