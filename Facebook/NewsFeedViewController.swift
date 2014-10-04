@@ -130,7 +130,6 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
                 }, completion: { (finished: Bool) -> Void in
                 imageView.removeFromSuperview()
                 transitionContext.completeTransition(true)
-
                     
             })
         } else {
