@@ -79,7 +79,6 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             dispatch_get_main_queue(), closure)
     }
     
-
     func onTapGesture(tapGesture: UITapGestureRecognizer) {
         
         selectedImageView = tapGesture.view as? UIImageView
@@ -114,10 +113,18 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
         
         if (isPresenting) {
             containerView.addSubview(toViewController!.view)
-            toViewController!.view.alpha = 0
+            
+            var imageView = UIImageView(frame: self.selectedImageView!.frame)
+            imageView.image = self.selectedImageView!.image
+            containerView.addSubview(imageView)
+
             UIView.animateWithDuration(1.0, animations: { () -> Void in
+                
+                imageView.frame = CGRect(x: containerView.frame.origin.x, y: containerView.frame.origin.y, width: containerView.frame.width, height: containerView.frame.height)
                 toViewController!.view.alpha = 1
+    
                 }, completion: { (finished: Bool) -> Void in
+                imageView.removeFromSuperview()
                 transitionContext.completeTransition(true)
             })
         } else {
@@ -137,7 +144,6 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
         var destinationViewController = segue.destinationViewController as PhotoViewController
         destinationViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
         destinationViewController.transitioningDelegate = self
-        
         
         destinationViewController.newImage = self.selectedImageView!.image
     }
