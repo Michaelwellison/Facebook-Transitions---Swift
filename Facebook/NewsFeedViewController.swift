@@ -174,6 +174,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
         destinationViewController.transitioningDelegate = self
         
         destinationViewController.newImage = self.selectedImageView!.image
-        destinationViewController.weddingImages = self.weddingImages
+        destinationViewController.newImageView = self.selectedImageView!
+        
     }
 }
