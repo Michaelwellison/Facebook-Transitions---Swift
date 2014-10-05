@@ -12,11 +12,13 @@ class PhotoViewController: UIViewController {
 
     @IBOutlet weak var photoViewImage: UIImageView!
     var newImage : UIImage?
-   
+    var weddingImages : [UIImageView] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         photoViewImage.image = newImage
+        println("The number of images in the array are \(weddingImages.count)")
         
     }
 

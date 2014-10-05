@@ -153,11 +153,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
                     imageView.removeFromSuperview()
                     transitionContext.completeTransition(true)
                     toViewController!.view.hidden = false
-                    
             })
-            
-            
-            
             
         } else {
             UIView.animateWithDuration(1.0, animations: { () -> Void in
@@ -178,5 +174,6 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
         destinationViewController.transitioningDelegate = self
         
         destinationViewController.newImage = self.selectedImageView!.image
+        destinationViewController.weddingImages = self.weddingImages
     }
 }
