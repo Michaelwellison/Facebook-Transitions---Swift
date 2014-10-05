@@ -72,6 +72,11 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             var tapGesture = UITapGestureRecognizer(target: self, action: "onTapGesture:")
             item.addGestureRecognizer(tapGesture)
         }
+        wedding1ImageView.tag = 0
+        wedding2ImageView.tag = 1
+        wedding3ImageView.tag = 2
+        wedding4ImageView.tag = 3
+        wedding5ImageView.tag = 4
     }
     
     func delay(delay:Double, closure:()->()) {
@@ -115,32 +120,44 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
         var fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
         
         if (isPresenting) {
+            
             containerView.addSubview(toViewController!.view)
+            toViewController!.view.hidden = true
             
             var imageView = UIImageView(frame: CGRect(x: self.selectedImageView!.frame.origin.x, y: self.selectedImageView!.frame.origin.y + self.navBarImage.frame.height + self.composeImageView.frame.height, width: self.selectedImageView!.frame.width, height: self.selectedImageView!.frame.height))
-            
-            println(imageView.frame.width)
-            
             if imageView.frame.width == self.wedding1ImageView.frame.width {
                 imageView.contentMode = UIViewContentMode.ScaleAspectFill
+                
             } else {
                 imageView.contentMode = UIViewContentMode.ScaleAspectFit
             }
             
             imageView.image = self.selectedImageView!.image
             containerView.addSubview(imageView)
-            toViewController!.view.alpha = 0
             imageView.clipsToBounds = true
             
             UIView.animateWithDuration(1.0, animations: { () -> Void in
                 
-                imageView.frame = CGRect(x: 0, y: 44, width: 320, height: 480)
+                
+                if self.selectedImageView!.tag == 0 {
+                    println(self.selectedImageView!.tag)
+                    imageView.frame = CGRect(x: 0, y: 70, width: 320, height: 480)
+                } else {
+                    imageView.frame = CGRect(x: 0, y: 300, width: 320, height: 213)
+                    println(self.selectedImageView!.tag)
+                }
+                
+                
                 }, completion: { (finished: Bool) -> Void in
-                imageView.removeFromSuperview()
-                transitionContext.completeTransition(true)
+                    imageView.removeFromSuperview()
+                    transitionContext.completeTransition(true)
+                    toViewController!.view.hidden = false
                     
             })
-            toViewController!.view.alpha = 1
+            
+            
+            
+            
         } else {
             UIView.animateWithDuration(1.0, animations: { () -> Void in
                 fromViewController!.view.alpha = 0
