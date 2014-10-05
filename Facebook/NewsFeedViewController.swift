@@ -133,20 +133,21 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             }
             
             imageView.image = self.selectedImageView!.image
+            containerView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
             containerView.addSubview(imageView)
             imageView.clipsToBounds = true
             
             UIView.animateWithDuration(1.0, animations: { () -> Void in
                 
-                
                 if self.selectedImageView!.tag == 0 {
                     println(self.selectedImageView!.tag)
                     imageView.frame = CGRect(x: 0, y: 70, width: 320, height: 480)
                 } else {
-                    imageView.frame = CGRect(x: 0, y: 300, width: 320, height: 213)
+                    imageView.frame = CGRect(x: 0, y: containerView.center.y, width: 320, height: 213)
+                    imageView.center = containerView.center
                     println(self.selectedImageView!.tag)
                 }
-                
+                    containerView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
                 
                 }, completion: { (finished: Bool) -> Void in
                     imageView.removeFromSuperview()
