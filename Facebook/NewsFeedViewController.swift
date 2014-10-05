@@ -118,21 +118,29 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             containerView.addSubview(toViewController!.view)
             
             var imageView = UIImageView(frame: CGRect(x: self.selectedImageView!.frame.origin.x, y: self.selectedImageView!.frame.origin.y + self.navBarImage.frame.height + self.composeImageView.frame.height, width: self.selectedImageView!.frame.width, height: self.selectedImageView!.frame.height))
-            println("x is \(imageView.frame.origin.x) and y is \(imageView.frame.origin.y)")
+            
+            println(imageView.frame.width)
+            
+            if imageView.frame.width == self.wedding1ImageView.frame.width {
+                imageView.contentMode = UIViewContentMode.ScaleAspectFill
+            } else {
+                imageView.contentMode = UIViewContentMode.ScaleAspectFit
+            }
+            
             imageView.image = self.selectedImageView!.image
             containerView.addSubview(imageView)
             toViewController!.view.alpha = 0
+            imageView.clipsToBounds = true
+            
             UIView.animateWithDuration(1.0, animations: { () -> Void in
                 
                 imageView.frame = CGRect(x: 0, y: 44, width: 320, height: 480)
-                toViewController!.view.alpha = 1
-                imageView.contentMode = UIViewContentMode.ScaleAspectFit
-    
                 }, completion: { (finished: Bool) -> Void in
                 imageView.removeFromSuperview()
                 transitionContext.completeTransition(true)
                     
             })
+            toViewController!.view.alpha = 1
         } else {
             UIView.animateWithDuration(1.0, animations: { () -> Void in
                 fromViewController!.view.alpha = 0
