@@ -77,6 +77,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
         wedding3ImageView.tag = 2
         wedding4ImageView.tag = 3
         wedding5ImageView.tag = 4
+        
     }
     
     func delay(delay:Double, closure:()->()) {
@@ -151,6 +152,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             })
             
         } else {
+            fromViewController!.view.hidden = true
             containerView.addSubview(fromViewController!.view)
             containerView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
             var imageView = UIImageView(image: self.selectedImageView!.image)
