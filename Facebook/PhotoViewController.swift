@@ -27,7 +27,6 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
         
         configurePhotImageView()
         configureScrollView()
-
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,7 +61,6 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         println("scroll view is scrolling")
-        var window = UIApplication.sharedApplication().keyWindow
         
         if scrollView.dragging {
             buttonContainerView.alpha += -0.025
