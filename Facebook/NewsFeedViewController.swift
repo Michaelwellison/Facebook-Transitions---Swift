@@ -155,6 +155,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             containerView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
             var imageView = UIImageView(image: self.selectedImageView!.image)
             imageView.contentMode = UIViewContentMode.ScaleAspectFill
+            imageView.clipsToBounds = true
             containerView.addSubview(imageView)
             if self.selectedImageView!.tag == 0 {
                 
@@ -168,6 +169,9 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             UIView.animateWithDuration(1.0, animations: { () -> Void in
                 fromViewController!.view.alpha = 0
                 containerView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+                
+                imageView.frame = self.selectedImageView!.frame
+                imageView.frame.origin.y += self.navBarImage.frame.height + self.composeImageView.frame.height
                 
                 }, completion: { (finished: Bool) -> Void in
                     
