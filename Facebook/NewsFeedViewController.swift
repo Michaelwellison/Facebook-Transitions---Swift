@@ -125,13 +125,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             toViewController!.view.hidden = true
             
             var imageView = UIImageView(frame: CGRect(x: self.selectedImageView!.frame.origin.x, y: self.selectedImageView!.frame.origin.y + self.navBarImage.frame.height + self.composeImageView.frame.height, width: self.selectedImageView!.frame.width, height: self.selectedImageView!.frame.height))
-            if imageView.frame.width == self.wedding1ImageView.frame.width {
-                imageView.contentMode = UIViewContentMode.ScaleAspectFill
-                
-            } else {
-                imageView.contentMode = UIViewContentMode.ScaleAspectFit
-            }
-            
+            imageView.contentMode = UIViewContentMode.ScaleAspectFill
             imageView.image = self.selectedImageView!.image
             containerView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
             containerView.addSubview(imageView)
@@ -157,11 +151,28 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             })
             
         } else {
+            containerView.addSubview(fromViewController!.view)
+            containerView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+            var imageView = UIImageView(image: self.selectedImageView!.image)
+            imageView.contentMode = UIViewContentMode.ScaleAspectFill
+            containerView.addSubview(imageView)
+            if self.selectedImageView!.tag == 0 {
+                
+                imageView.frame = CGRect(x: 0, y: 44, width: 320, height: 480)
+                
+            } else {
+                imageView.frame = CGRect(x: 0, y: containerView.center.y, width: 320, height: 213)
+                imageView.center = containerView.center
+            }
+            
             UIView.animateWithDuration(1.0, animations: { () -> Void in
                 fromViewController!.view.alpha = 0
+                containerView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+                
                 }, completion: { (finished: Bool) -> Void in
-                transitionContext.completeTransition(true)
-                fromViewController?.view.removeFromSuperview()
+                    
+                    transitionContext.completeTransition(true)
+                    fromViewController?.view.removeFromSuperview()
             })
         }
     }
