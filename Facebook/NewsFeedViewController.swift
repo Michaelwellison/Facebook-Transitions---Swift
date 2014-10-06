@@ -141,7 +141,8 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
                 
                 if self.selectedImageView!.tag == 0 {
                     println(self.selectedImageView!.tag)
-                    imageView.frame = CGRect(x: 0, y: 70, width: 320, height: 480)
+                    imageView.frame = CGRect(x: 0, y: 44, width: 320, height: 480)
+                    println(containerView.frame.origin.y)
                 } else {
                     imageView.frame = CGRect(x: 0, y: containerView.center.y, width: 320, height: 213)
                     imageView.center = containerView.center
