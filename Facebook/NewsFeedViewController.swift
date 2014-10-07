@@ -27,7 +27,6 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
     var weddingImages : [UIImageView] = []
     var selectedImageView : UIImageView?
     var isPresenting : Bool = true
-    var screenShot : UIView?
     
     // MARK: View Lifecycle
     
@@ -88,9 +87,6 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
     }
     
     func onTapGesture(tapGesture: UITapGestureRecognizer) {
-        
-      //  screenShot.addSubview(view)
-      //  view.bringSubviewToFront(screenShot)
         
         selectedImageView = tapGesture.view as? UIImageView
         self.performSegueWithIdentifier("photoDetailSegue", sender: self)
@@ -153,11 +149,6 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
                     containerView.backgroundColor = UIColor.clearColor()
             })
             
-            if let vc = toViewController as? PhotoViewController {
-                // This is where you can access properties of either view controller
-                    // or let vc = fromViewController as PhotoViewController
-            }
-            
         } else {
             fromViewController!.view.hidden = true
             containerView.addSubview(fromViewController!.view)
@@ -172,14 +163,6 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             imageView.frame = vc.PhotoImageView!.frame
             imageView.frame.origin.y -= vc.scrollView!.contentOffset.y - 44
             
-            if self.selectedImageView!.tag == 0 {
-                
-              //  imageView.frame = CGRect(x: 0, y: 44, width: 320, height: 480)
-                
-            } else {
-              //  imageView.frame = CGRect(x: 0, y: containerView.center.y, width: 320, height: 213)
-              //  imageView.center = containerView.center
-            }
             
             UIView.animateWithDuration(1.0, animations: { () -> Void in
                 fromViewController!.view.alpha = 0
@@ -209,6 +192,5 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
         
         destinationViewController.newImage = self.selectedImageView!.image
         destinationViewController.newImageView = self.selectedImageView!
-  //      destinationViewController.NewsFeedViewControllerScreenShot = self.screenShot!
     }
 }

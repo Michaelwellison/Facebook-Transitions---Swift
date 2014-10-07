@@ -27,7 +27,6 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
         
         configurePhotoImageView()
         configureScrollView()
-  //      configureScreenShot()
         
         view.backgroundColor = UIColor.clearColor()
         scrollView.backgroundColor = UIColor.clearColor()
@@ -60,10 +59,9 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
         scrollView.contentOffset.y = 44
         scrollView.contentInset = UIEdgeInsets(top: -46, left: 0, bottom: -44, right: 0)
         scrollView.delegate = self
-    }
-    
-    func configureScreenShot() {
-        view.addSubview(NewsFeedViewControllerScreenShot!)
+        scrollView.minimumZoomScale = 1
+        scrollView.maximumZoomScale = 2
+        
     }
     
     // MARK: Scroll View Delegate
@@ -84,6 +82,11 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
                 self.buttonContainerView.alpha = 1
             })
         }
+    }
+    
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return PhotoImageView
+        
     }
     
     // MARK: Actions
