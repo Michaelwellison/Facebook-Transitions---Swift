@@ -20,21 +20,19 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
     @IBOutlet weak var wedding3ImageView: UIImageView!
     @IBOutlet weak var wedding4ImageView: UIImageView!
     @IBOutlet weak var wedding5ImageView: UIImageView!
-    
     @IBOutlet weak var navBarImage: UIImageView!
-    
     @IBOutlet weak var composeImageView: UIImageView!
     
     // MARK: Variables
     var weddingImages : [UIImageView] = []
     var selectedImageView : UIImageView?
     var isPresenting : Bool = true
+    var screenShot : UIView?
     
     // MARK: View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         configureWeddingImages()
         
@@ -90,6 +88,9 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
     }
     
     func onTapGesture(tapGesture: UITapGestureRecognizer) {
+        
+      //  screenShot.addSubview(view)
+      //  view.bringSubviewToFront(screenShot)
         
         selectedImageView = tapGesture.view as? UIImageView
         self.performSegueWithIdentifier("photoDetailSegue", sender: self)
@@ -149,6 +150,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
                     imageView.removeFromSuperview()
                     transitionContext.completeTransition(true)
                     toViewController!.view.hidden = false
+                    containerView.backgroundColor = UIColor.clearColor()
             })
             
         } else {
@@ -182,6 +184,9 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             })
         }
     }
+    
+    // MARK: Actions
+    
 
     
     // MARK: Navigation
@@ -193,6 +198,6 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
         
         destinationViewController.newImage = self.selectedImageView!.image
         destinationViewController.newImageView = self.selectedImageView!
-        
+  //      destinationViewController.NewsFeedViewControllerScreenShot = self.screenShot!
     }
 }

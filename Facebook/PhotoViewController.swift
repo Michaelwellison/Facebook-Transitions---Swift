@@ -18,15 +18,20 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
     // MARK: Variables
     var newImage : UIImage?
     var newImageView : UIImageView?
-    
+    var NewsFeedViewControllerScreenShot : UIView?
     
     // MARK: View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configurePhotImageView()
+        configurePhotoImageView()
         configureScrollView()
+  //      configureScreenShot()
+        
+        view.backgroundColor = UIColor.clearColor()
+        scrollView.backgroundColor = UIColor.clearColor()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -36,7 +41,7 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
     
     // MARK: Configuration
     
-    func configurePhotImageView() {
+    func configurePhotoImageView() {
         PhotoImageView.image = newImage
         PhotoImageView.contentMode = UIViewContentMode.ScaleAspectFill
         
@@ -57,6 +62,11 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
         scrollView.delegate = self
     }
     
+    func configureScreenShot() {
+        view.addSubview(NewsFeedViewControllerScreenShot!)
+        
+    }
+    
     // MARK: Scroll View Delegate
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -67,7 +77,6 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
         } else {
             buttonContainerView.alpha = 1
         }
-        println(scrollView.dragging)
     }
     
     // MARK: Actions
