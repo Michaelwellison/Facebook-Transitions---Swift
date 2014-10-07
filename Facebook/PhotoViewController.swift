@@ -64,18 +64,25 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
     
     func configureScreenShot() {
         view.addSubview(NewsFeedViewControllerScreenShot!)
-        
     }
     
     // MARK: Scroll View Delegate
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         println("scroll view is scrolling")
+        println(scrollView.contentOffset)
+        
+        if scrollView.contentOffset.y <= -44 {
+            dismissViewControllerAnimated(true, completion: nil)
+        }
         
         if scrollView.dragging {
-            buttonContainerView.alpha += -0.025
+            buttonContainerView.alpha += -0.0355
         } else {
-            buttonContainerView.alpha = 1
+            
+            UIView.animateWithDuration(0.6, animations: { () -> Void in
+                self.buttonContainerView.alpha = 1
+            })
         }
     }
     

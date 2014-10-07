@@ -153,6 +153,11 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
                     containerView.backgroundColor = UIColor.clearColor()
             })
             
+            if let vc = toViewController as? PhotoViewController {
+                // This is where you can access properties of either view controller
+                    // or let vc = fromViewController as PhotoViewController
+            }
+            
         } else {
             fromViewController!.view.hidden = true
             containerView.addSubview(fromViewController!.view)
