@@ -166,13 +166,19 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             imageView.contentMode = UIViewContentMode.ScaleAspectFill
             imageView.clipsToBounds = true
             containerView.addSubview(imageView)
+            let vc = fromViewController as PhotoViewController
+            
+            
+            imageView.frame = vc.PhotoImageView!.frame
+            imageView.frame.origin.y -= vc.scrollView!.contentOffset.y - 44
+            
             if self.selectedImageView!.tag == 0 {
                 
-                imageView.frame = CGRect(x: 0, y: 44, width: 320, height: 480)
+              //  imageView.frame = CGRect(x: 0, y: 44, width: 320, height: 480)
                 
             } else {
-                imageView.frame = CGRect(x: 0, y: containerView.center.y, width: 320, height: 213)
-                imageView.center = containerView.center
+              //  imageView.frame = CGRect(x: 0, y: containerView.center.y, width: 320, height: 213)
+              //  imageView.center = containerView.center
             }
             
             UIView.animateWithDuration(1.0, animations: { () -> Void in
