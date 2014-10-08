@@ -113,17 +113,16 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        println("animating transition")
         var containerView = transitionContext.containerView()
         var toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
         var fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
+        var smallImageView : UIImageView?
         
         if (isPresenting) {
             
             containerView.addSubview(toViewController!.view)
             toViewController!.view.hidden = true
             
-            println(self.selectedImageView!.frame)
             var imageView = UIImageView(frame: CGRect(x: self.selectedImageView!.frame.origin.x, y: self.selectedImageView!.frame.origin.y + self.navBarImage.frame.height + self.composeImageView.frame.height, width: self.selectedImageView!.frame.width, height: self.selectedImageView!.frame.height))
             imageView.contentMode = UIViewContentMode.ScaleAspectFill
             imageView.image = self.selectedImageView!.image
@@ -134,17 +133,16 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             UIView.animateWithDuration(1.0, animations: { () -> Void in
                 
                 if self.selectedImageView!.tag == 0 {
-                    println(self.selectedImageView!.tag)
                     imageView.frame = CGRect(x: 0, y: 45, width: 320, height: 480)
-                    println(imageView.frame)
                 } else {
                     imageView.frame = CGRect(x: 0, y: containerView.center.y, width: 320, height: 213)
                     imageView.center = containerView.center
-                    println(self.selectedImageView!.tag)
+
                 }
                     containerView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
                 
                 }, completion: { (finished: Bool) -> Void in
+
                     imageView.removeFromSuperview()
                     transitionContext.completeTransition(true)
                     toViewController!.view.hidden = false
@@ -152,6 +150,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             })
             
         } else {
+
             fromViewController!.view.hidden = true
             containerView.addSubview(fromViewController!.view)
             containerView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
@@ -161,21 +160,37 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             containerView.addSubview(imageView)
             let vc = fromViewController as PhotoViewController
             
-            
-            imageView.frame = vc.PhotoImageView!.frame
+            imageView.frame = selectedImageView!.frame
             imageView.frame.origin.y -= vc.scrollView!.contentOffset.y - 44
             
             
             UIView.animateWithDuration(1.0, animations: { () -> Void in
                 fromViewController!.view.alpha = 0
                 containerView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+                imageView.contentMode = UIViewContentMode.ScaleAspectFill
+                switch vc.scrollView.contentOffset.x {
+                case 0:
+                    imageView.frame = CGRect(x: 4, y: 83 + 110, width: 154, height: 154)
+                case 320:
+                    imageView.frame = CGRect(x: 4, y: 241 + 110, width: 154, height: 154)
+                case 640:
+                    imageView.frame = CGRect(x: 161, y: 81 + 110, width: 156, height: 105)
+                case 960:
+                    imageView.frame = CGRect(x: 161, y: 188 + 110, width: 156, height: 105)
+                case 1280:
+                    imageView.frame = CGRect(x: 161, y: 293 + 110, width: 156, height: 105)
+                default:
+                    println("nothing happens")
                 
-                imageView.frame = self.selectedImageView!.frame
-                imageView.frame.origin.y += self.navBarImage.frame.height + self.composeImageView.frame.height
+                }
+//                imageView.frame = self.selectedImageView!.frame
+//                println("newImageView tag is \(vc.newImageView!.tag)")
+//                println("selectedImageView is \(self.selectedImageView!.frame)")
+//                imageView.frame.origin.y += self.navBarImage.frame.height + self.composeImageView.frame.height
                 
                 }, completion: { (finished: Bool) -> Void in
                     
-                    transitionContext.completeTransition(true)
+                    transitionContext.completeTransition(false)
                     fromViewController?.view.removeFromSuperview()
             })
         }
