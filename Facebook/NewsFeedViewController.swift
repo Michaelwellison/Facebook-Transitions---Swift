@@ -69,6 +69,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             var tapGesture = UITapGestureRecognizer(target: self, action: "onTapGesture:")
             item.addGestureRecognizer(tapGesture)
         }
+        
         wedding1ImageView.tag = 0
         wedding2ImageView.tag = 1
         wedding3ImageView.tag = 2
@@ -122,6 +123,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             containerView.addSubview(toViewController!.view)
             toViewController!.view.hidden = true
             
+            println(self.selectedImageView!.frame)
             var imageView = UIImageView(frame: CGRect(x: self.selectedImageView!.frame.origin.x, y: self.selectedImageView!.frame.origin.y + self.navBarImage.frame.height + self.composeImageView.frame.height, width: self.selectedImageView!.frame.width, height: self.selectedImageView!.frame.height))
             imageView.contentMode = UIViewContentMode.ScaleAspectFill
             imageView.image = self.selectedImageView!.image
@@ -133,8 +135,8 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
                 
                 if self.selectedImageView!.tag == 0 {
                     println(self.selectedImageView!.tag)
-                    imageView.frame = CGRect(x: 0, y: 44, width: 320, height: 480)
-                    println(containerView.frame.origin.y)
+                    imageView.frame = CGRect(x: 0, y: 45, width: 320, height: 480)
+                    println(imageView.frame)
                 } else {
                     imageView.frame = CGRect(x: 0, y: containerView.center.y, width: 320, height: 213)
                     imageView.center = containerView.center
@@ -192,5 +194,6 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
         
         destinationViewController.newImage = self.selectedImageView!.image
         destinationViewController.newImageView = self.selectedImageView!
+        destinationViewController.newImageViews = self.weddingImages
     }
 }
