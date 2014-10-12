@@ -17,10 +17,9 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
     
     
     // MARK: Variables
-    var newImage : UIImage?
     var newImageView : UIImageView?
-    var newImageViews : [UIImageView]?
-    var NewsFeedViewControllerScreenShot : UIView?
+    var newImageViews : [UIImageView] = []
+    var newSelectedImageView = UIImageView()
     
     // MARK: View Lifecycle
     
@@ -28,57 +27,62 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         
         configureScrollView()
+        configurePhotoImageView()
         view.backgroundColor = UIColor.clearColor()
-        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        println("view did appear")
-        configurePhotoImageView()
-    }
-    
     // MARK: Configuration
     
     func configurePhotoImageView() {
-
-        for item in newImageViews! {
-            item.contentMode = UIViewContentMode.ScaleAspectFill
-            scrollView.addSubview(item)
+        
+        var i = 0
+        while i < 5 {
+            var photoImageView = UIImageView()
+            photoImageView.contentMode = UIViewContentMode.ScaleAspectFill
+            photoImageView.userInteractionEnabled = true
+            photoImageView.tag = i
+            scrollView.addSubview(photoImageView)
+            newImageViews += [photoImageView]
             
-            switch item.tag {
+            switch photoImageView.tag {
             case 0:
-                item.frame = CGRect(x: scrollView.frame.origin.x, y: 70, width: 320, height: 480)
-                item.center.y = scrollView.center.y
-                println(scrollView.frame)
+                photoImageView.frame = CGRect(x: scrollView.frame.origin.x, y: 70, width: 320, height: 480)
+                photoImageView.center.y = scrollView.center.y
+                photoImageView.image = UIImage(named: "wedding1")
                 
             case 1:
-                item.frame = CGRect(x: scrollView.frame.origin.x + 320, y: scrollView.center.y, width: 320, height: 213)
-                item.center.y = scrollView.center.y
+                photoImageView.frame = CGRect(x: scrollView.frame.origin.x + 320, y: scrollView.center.y, width: 320, height: 213)
+                photoImageView.center.y = scrollView.center.y
+                photoImageView.image = UIImage(named: "wedding2")
                 
                 
             case 2:
-                item.frame = CGRect(x: scrollView.frame.origin.x + 640, y: scrollView.center.y, width: 320, height: 213)
-                item.center.y = scrollView.center.y
+                photoImageView.frame = CGRect(x: scrollView.frame.origin.x + 640, y: scrollView.center.y, width: 320, height: 213)
+                photoImageView.center.y = scrollView.center.y
+                photoImageView.image = UIImage(named: "wedding3")
                 
             case 3:
-                item.frame = CGRect(x: scrollView.frame.origin.x + 960, y: scrollView.center.y, width: 320, height: 213)
-                item.center.y = scrollView.center.y
+                photoImageView.frame = CGRect(x: scrollView.frame.origin.x + 960, y: scrollView.center.y, width: 320, height: 213)
+                photoImageView.center.y = scrollView.center.y
+                photoImageView.image = UIImage(named: "wedding4")
                 
             case 4:
-                item.frame = CGRect(x: scrollView.frame.origin.x + 1280, y: scrollView.center.y, width: 320, height: 213)
-                item.center.y = scrollView.center.y
+                photoImageView.frame = CGRect(x: scrollView.frame.origin.x + 1280, y: scrollView.center.y, width: 320, height: 213)
+                photoImageView.center.y = scrollView.center.y
+                photoImageView.image = UIImage(named: "wedding5")
                 
             default:
-                item.frame = CGRect(x: scrollView.frame.origin.x, y: scrollView.center.y, width: 320, height: 213)
-                item.center.y = scrollView.center.y
-                
-                
+                photoImageView.frame = CGRect(x: scrollView.frame.origin.x, y: scrollView.center.y, width: 320, height: 213)
+                photoImageView.center.y = scrollView.center.y
+                photoImageView.image = UIImage(named: "wedding1")
+            }
+            
+            i++
         }
-    }
     }
     func configureScrollView() {
         scrollView.contentSize = CGSize(width: 1600, height: 585)
@@ -111,28 +115,43 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
-        
         var velocity = scrollView.panGestureRecognizer.velocityInView(view)
         
         if scrollView.panGestureRecognizer.state == UIGestureRecognizerState.Changed {
             if velocity.y > 0 {
                 buttonContainerView.alpha += -0.0355
+                
+                
+                println(newSelectedImageView.frame)
             }
-            
-        } else if scrollView.panGestureRecognizer.state == UIGestureRecognizerState.Ended {
-            
-           
-            }
+        }
     
         if scrollView.contentOffset.y <= -44 {
             dismissViewControllerAnimated(true, completion: nil)
+            
+            switch scrollView.contentOffset.x {
+            case 0:
+                newSelectedImageView = newImageViews[0]
+            case 320:
+                newSelectedImageView = newImageViews[1]
+            case 640:
+                newSelectedImageView = newImageViews[2]
+            case 960:
+                newSelectedImageView = newImageViews[4]
+            default:
+                newSelectedImageView = newImageViews[4]
+                
+                println(newSelectedImageView.frame)
+            }
+            
+            
         }
     
         if scrollView.dragging == false {
             UIView.animateWithDuration(0.6, animations: { () -> Void in
             self.buttonContainerView.alpha = 1
-    
             })}
+        
     }
     
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {

@@ -154,7 +154,7 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
             fromViewController!.view.hidden = true
             containerView.addSubview(fromViewController!.view)
             containerView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
-            var imageView = UIImageView(image: self.selectedImageView!.image)
+            var imageView = UIImageView()
             imageView.contentMode = UIViewContentMode.ScaleAspectFill
             imageView.clipsToBounds = true
             containerView.addSubview(imageView)
@@ -207,8 +207,6 @@ class NewsFeedViewController: UIViewController, UIViewControllerTransitioningDel
         destinationViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
         destinationViewController.transitioningDelegate = self
         
-        destinationViewController.newImage = self.selectedImageView!.image
         destinationViewController.newImageView = self.selectedImageView!
-        destinationViewController.newImageViews = self.weddingImages
     }
 }
